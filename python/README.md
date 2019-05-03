@@ -35,7 +35,3 @@ Output:
 * num_clust: shows total number of cluster in each partition P
 * req_c: Labels of required clusters (Nx1). Only set if `req_clust` is not None.
 
-
-**The code and FINCH algorithm is not meant for commercial use. Please contact the author below for licensing information.**
-
-M. Saquib Sarfraz (saquib.sarfraz@kit.edu)
