@@ -14,7 +14,7 @@ except Exception as e:
     pyflann_available = False
     pass
 
-RUN_FLANN = 700000
+RUN_FLANN = 70000
 
 
 def clust_rank(mat, initial_rank=None, distance='cosine'):
