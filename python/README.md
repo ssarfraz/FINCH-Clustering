@@ -17,7 +17,7 @@ from finch import FINCH
 c, num_clust, req_c = FINCH(data)
 
 ```
-You can set options e.g., required number of cluster or distance etc,
+You can set options e.g., required number of cluster [optional] or distance etc,
 
 ```
 c, num_clust, req_c = FINCH(data, initial_rank=None, req_clust=None, distance='cosine', verbose=True)
