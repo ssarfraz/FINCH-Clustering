@@ -5,7 +5,7 @@ The repository contains our Python and Matlab code for the proposed FINCH cluste
 ```
 M. Saquib Sarfraz, Vivek Sharma and Rainer Stiefelhagen,
 "Efficient Parameter-free Clustering Using First Neighbor Relations",
-[https://arxiv.org/abs/1902.11266](https://arxiv.org/abs/1902.11266) [CVPR 2019 Oral]
+https://arxiv.org/abs/1902.11266 [CVPR 2019 Oral]
 ```
 
 
