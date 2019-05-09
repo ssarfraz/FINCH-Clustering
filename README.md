@@ -17,7 +17,7 @@ Python : numpy, scipy, sklearn
 
 Matlab : 2017 or above: may run on earlier versions as well
 
-**Optional**.  Install [pyflann](https://github.com/nashory/pyflann​) or [flann](https://github.com/mariusmuja/flann) to get first neighbours from Kd-tree for large data
+**Optional**.  Install [pyflann](https://github.com/nashory/pyflann) or [flann](https://github.com/mariusmuja/flann) to get first neighbours from Kd-tree for large data
 
 
 ## Usage:
