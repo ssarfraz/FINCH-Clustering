@@ -3,7 +3,7 @@
 
 See requirements.txt
 
-[Optional]: Install [pyflann](https://github.com/nashory/pyflann​) to get first neighbours from Kd-tree for large data
+[Optional]: Install [pyflann](https://github.com/nashory/pyflann) to get first neighbours from Kd-tree for large data
 
 
 ## Usage:
