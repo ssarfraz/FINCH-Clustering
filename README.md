@@ -1,14 +1,17 @@
 # First Integer Neighbor Clustering Hierarchy (FINCH) Algorithm
 
-The repository contains our Python and Matlab code for the proposed FINCH clustering algorithm described in the **Efficient Parameter-free Clustering Using First Neighbor Relations** CVPR 2019 paper.
+The repository contains our Python and Matlab code for the proposed FINCH clustering algorithm described in our **Efficient Parameter-free Clustering Using First Neighbor Relations** CVPR 2019 oral [paper](https://arxiv.org/abs/1902.11266).
 
 ```
-M. Saquib Sarfraz, Vivek Sharma and Rainer Stiefelhagen,
-"Efficient Parameter-free Clustering Using First Neighbor Relations",
-https://arxiv.org/abs/1902.11266 [CVPR 2019 Oral]
+@inproceedings{finch,
+    author    = {M. Saquib Sarfraz, Vivek Sharma and Rainer Stiefelhagen}, 
+    title     = {Efficient Parameter-free Clustering Using First Neighbor Relations}, 
+    booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+    pages = {8934--8943}
+    year  = {2019}
+}
+
 ```
-
-
 
 
 ##### Requirements
@@ -52,7 +55,7 @@ Input:
 Output:
 
 * c: N x P matrix  Each column vector contains cluster labels for each partition P
-* num:clust: shows total number of cluster in each partition P
+* num_clust: shows total number of cluster in each partition P
 
 In Matlab typically you would run: 
 ```
