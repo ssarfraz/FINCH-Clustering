@@ -10,7 +10,6 @@ The repository contains our Python and Matlab code for the proposed FINCH cluste
     pages = {8934--8943}
     year  = {2019}
 }
-
 ```
 
 
