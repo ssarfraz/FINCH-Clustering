@@ -1,6 +1,6 @@
 # First Integer Neighbor Clustering Hierarchy (FINCH) Algorithm
 
-The repository contains our Python and Matlab code for the proposed FINCH clustering algorithm described in our **Efficient Parameter-free Clustering Using First Neighbor Relations** CVPR 2019 oral [paper](https://arxiv.org/abs/1902.11266).
+The repository contains our Python and Matlab code for the proposed FINCH clustering algorithm described in our **Efficient Parameter-free Clustering Using First Neighbor Relations** CVPR 2019 oral [paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Sarfraz_Efficient_Parameter-Free_Clustering_Using_First_Neighbor_Relations_CVPR_2019_paper.pdf).
 
 ```
 @inproceedings{finch,
