@@ -30,7 +30,7 @@ Input:
     * req_c: specify required number of cluster
     * distance: One of ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'] Recommended: 'cosine (default)' and 'euclidean (for 2D toy data)'
     * initial_rank: Nx1 vector of 1-neighbour indices
-    * ensure_early_exit: (default: False) if set it may help for Unbalanced or large datasets, ensure purity of merges and helps early exit
+    * ensure_early_exit: (default: True) if set it may help for Unbalanced or large datasets, ensure purity of merges and helps early exit
     * verbos : for printing some output
 
 Output:
