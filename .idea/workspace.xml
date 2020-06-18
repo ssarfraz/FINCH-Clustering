@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="59618cd0-2cd5-45c6-b5ee-f802b678df7f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/python/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/python/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/python/finch.py" beforeDir="false" afterPath="$PROJECT_DIR$/python/finch.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,7 +16,7 @@
         <entry file="file://$PROJECT_DIR$/python/finch.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="136">
-              <caret line="127" column="32" lean-forward="true" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
+              <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -45,8 +44,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/python/finch.py" />
         <option value="$PROJECT_DIR$/python/README.md" />
+        <option value="$PROJECT_DIR$/python/finch.py" />
       </list>
     </option>
   </component>
@@ -61,7 +60,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="2176" />
+    <option name="x" value="2300" />
+    <option name="y" value="269" />
     <option name="width" value="1400" />
     <option name="height" value="1000" />
   </component>
@@ -90,7 +90,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="/cvhci/users/ssarfraz/Code" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -157,7 +158,7 @@
     <entry file="file://$PROJECT_DIR$/python/finch.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="127" column="32" lean-forward="true" selection-start-line="127" selection-start-column="32" selection-end-line="127" selection-end-column="32" />
+          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>
