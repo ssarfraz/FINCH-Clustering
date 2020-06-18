@@ -14,20 +14,20 @@ except Exception as e:
     pyflann_available = False
     pass
 
-RUN_FLANN = 70000
+FLANN_THRESHOLD = 700000
 
 
 def clust_rank(mat, initial_rank=None, distance='cosine'):
     s = mat.shape[0]
     if initial_rank is not None:
         orig_dist = []
-    elif s <= RUN_FLANN:
+    elif s <= FLANN_THRESHOLD:
         orig_dist = metrics.pairwise.pairwise_distances(mat, mat, metric=distance)
-        np.fill_diagonal(orig_dist, 1000.0)
+        np.fill_diagonal(orig_dist, 1e12)
         initial_rank = np.argmin(orig_dist, axis=1)
     else:
         if not pyflann_available:
-            raise MemoryError("You should use pyflann for inputs larger than {} samples.".format(RUN_FLANN))
+            raise MemoryError("You should use pyflann for inputs larger than {} samples.".format(FLANN_THRESHOLD))
         print('Using flann to compute 1st-neighbours at this step ...')
         flann = FLANN()
         result, dists = flann.nn(mat, mat, num_neighbors=2, algorithm="kdtree", trees=8, checks=128)
@@ -103,12 +103,13 @@ def req_numclust(c, data, req_clust, distance):
     return c_
 
 
-def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', verbose=True):
+def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_early_exit=False, verbose=True):
     """ FINCH clustering algorithm.
     :param data: Input matrix with features in rows.
     :param initial_rank: Nx1 first integer neighbor indices (optional).
     :param req_clust: Set output number of clusters (optional). Not recommended.
     :param distance: One of ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'] Recommended 'cosine'.
+    :param ensure_early_exit: [Optional flag] may help in large, high dim datasets, ensure purity of merges and helps early exit
     :param verbose: Print verbose output.
     :return:
             c: NxP matrix where P is the partition. Cluster label for every partition.
@@ -135,8 +136,10 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', verbose=Tr
 
     if verbose:
         print('Partition 0: {} clusters'.format(num_clust))
-    if len(orig_dist) != 0:
-        min_sim = np.max(orig_dist * adj.toarray())
+
+    if ensure_early_exit:
+        if len(orig_dist) != 0:
+            min_sim = np.max(orig_dist * adj.toarray())
 
     exit_clust = 2
     c_ = c
@@ -180,7 +183,7 @@ def main():
     args = parser.parse_args()
     data = np.genfromtxt(args.data_path, delimiter=",").astype(np.float32)
     start = time.time()
-    c, num_clust, req_c = FINCH(data, initial_rank=None, req_clust=None, distance='cosine', verbose=True)
+    c, num_clust, req_c = FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_early_exit=False, verbose=True)
     print('Time Elapsed: {:2.2f} seconds'.format(time.time() - start))
 
     # Write back

@@ -20,14 +20,18 @@ c, num_clust, req_c = FINCH(data)
 You can set options e.g., required number of cluster [optional] or distance etc,
 
 ```
-c, num_clust, req_c = FINCH(data, initial_rank=None, req_clust=None, distance='cosine', verbose=True)
+c, num_clust, req_c = FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_early_exit=False, verbose=True)
 ```
 
 Input:
 
 * data: numpy array (feature vectors in rows)
-* initial_rank [Optional]: Nx1 vector of 1-neighbour indices.
-* verbos : for printing some output
+* [OPTIONAL]
+    * req_c: specify required number of cluster
+    * distance: One of ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'] Recommended: 'cosine (default)' and 'euclidean (for 2D toy data)'
+    * initial_rank: Nx1 vector of 1-neighbour indices
+    * ensure_early_exit: (default: False) if set it may help for large, high dim datasets, ensure purity of merges and helps early exit
+    * verbos : for printing some output
 
 Output:
 
