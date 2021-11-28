@@ -35,7 +35,7 @@ While both Matlab and python implementations of TW_FINCH are included, data read
 
 Add this repo to your Matlab path
 
-Run  MATLAB file [run_on_dataset.m] to reproduce the results in the paper. 
+Run  MATLAB file [run_on_dataset.m](https://github.com/ssarfraz/FINCH-Clustering/blob/master/TW-FINCH/run_on_dataset.m) to reproduce the results in the paper. 
 ```
 tw_finch = true
 Result = run_on_dataset(Dataset_name, tw_finch, datasets_root_path);
