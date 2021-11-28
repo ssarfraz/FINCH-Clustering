@@ -14,15 +14,25 @@ except Exception as e:
     pynndescent_available = False
     pass
 
+# use Approx NN to find first neighbor if samples more than ANN_THRESHOLD
 ANN_THRESHOLD = 70000
 
 
-def clust_rank(mat, initial_rank=None, distance='cosine'):
+def clust_rank(mat, initial_rank=None, distance='cosine', use_tw_finch=False):
     s = mat.shape[0]
+
     if initial_rank is not None:
         orig_dist = []
-    elif s <= FLANN_THRESHOLD:
+    elif s <= ANN_THRESHOLD:
+        if use_tw_finch:
+            loc = mat[:, -1]
+            mat = mat[:, :-1]
+            loc_dist = metrics.pairwise.euclidean_distances(loc[:, None], loc[:, None])
+        else:
+            loc_dist = 1.
+
         orig_dist = metrics.pairwise.pairwise_distances(mat, mat, metric=distance)
+        orig_dist = orig_dist * loc_dist
         np.fill_diagonal(orig_dist, 1e12)
         initial_rank = np.argmin(orig_dist, axis=1)
     else:
@@ -34,7 +44,7 @@ def clust_rank(mat, initial_rank=None, distance='cosine'):
             mat,
             n_neighbors=2,
             metric=distance,
-        )
+            )
 
         result, orig_dist = knn_index.neighbor_graph
         initial_rank = result[:, 1]
@@ -57,22 +67,6 @@ def get_clust(a, orig_dist, min_sim=None):
 
     num_clust, u = sp.csgraph.connected_components(csgraph=a, directed=True, connection='weak', return_labels=True)
     return u, num_clust
-
-
-def cool_mean_old(M, u):
-    _, nf = np.unique(u, return_counts=True)
-    idx = np.argsort(u)
-    M = M[idx, :]
-    M = np.vstack((np.zeros((1, M.shape[1])), M))
-
-    np.cumsum(M, axis=0, out=M)
-    cnf = np.cumsum(nf)
-    nf1 = np.insert(cnf, 0, 0)
-    nf1 = nf1[:-1]
-
-    M = M[cnf, :] - M[nf1, :]
-    M = M / nf[:, None]
-    return M
 
 
 def cool_mean(M, u):
@@ -105,23 +99,24 @@ def update_adj(adj, d):
     return a
 
 
-def req_numclust(c, data, req_clust, distance):
+def req_numclust(c, data, req_clust, distance, use_tw_finch=False):
     iter_ = len(np.unique(c)) - req_clust
     c_, mat = get_merge([], c, data)
     for i in range(iter_):
-        adj, orig_dist = clust_rank(mat, initial_rank=None, distance=distance)
+        adj, orig_dist = clust_rank(mat, initial_rank=None, distance=distance, use_tw_finch=use_tw_finch)
         adj = update_adj(adj, orig_dist)
         u, _ = get_clust(adj, [], min_sim=None)
         c_, mat = get_merge(c_, u, data)
     return c_
 
 
-def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_early_exit=True, verbose=True):
+def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', tw_finch=True, ensure_early_exit=False, verbose=True):
     """ FINCH clustering algorithm.
     :param data: Input matrix with features in rows.
     :param initial_rank: Nx1 first integer neighbor indices (optional).
     :param req_clust: Set output number of clusters (optional). Not recommended.
     :param distance: One of ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'] Recommended 'cosine'.
+    :param tw_finch: Run TW_FINCH on video data.
     :param ensure_early_exit: [Optional flag] may help in large, high dim datasets, ensure purity of merges and helps early exit
     :param verbose: Print verbose output.
     :return:
@@ -141,8 +136,15 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_ear
     # Cast input data to float32
     data = data.astype(np.float32)
 
+    if tw_finch:
+        n_frames = data.shape[0]
+        time_index = np.arange(n_frames) / n_frames
+        data = np.concatenate([data, time_index[..., np.newaxis]], axis=1)
+        ensure_early_exit = False
+        verbose = False
+
     min_sim = None
-    adj, orig_dist = clust_rank(data, initial_rank, distance)
+    adj, orig_dist = clust_rank(data, initial_rank, distance=distance, use_tw_finch=tw_finch)
     initial_rank = None
     group, num_clust = get_clust(adj, [], min_sim)
     c, mat = get_merge([], group, data)
@@ -151,7 +153,7 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_ear
         print('Partition 0: {} clusters'.format(num_clust))
 
     if ensure_early_exit:
-        if len(orig_dist) != 0:
+        if orig_dist.shape[-1] > 2:
             min_sim = np.max(orig_dist * adj.toarray())
 
     exit_clust = 2
@@ -160,7 +162,7 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_ear
     num_clust = [num_clust]
 
     while exit_clust > 1:
-        adj, orig_dist = clust_rank(mat, initial_rank, distance)
+        adj, orig_dist = clust_rank(mat, initial_rank, distance=distance, use_tw_finch=tw_finch)
         u, num_clust_curr = get_clust(adj, orig_dist, min_sim)
         c_, mat = get_merge(c_, u, data)
 
@@ -180,7 +182,7 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_ear
     if req_clust is not None:
         if req_clust not in num_clust:
             ind = [i for i, v in enumerate(num_clust) if v >= req_clust]
-            req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance)
+            req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, use_tw_finch=tw_finch)
         else:
             req_c = c[:, num_clust.index(req_clust)]
     else:
