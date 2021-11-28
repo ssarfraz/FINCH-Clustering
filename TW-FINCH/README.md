@@ -2,7 +2,7 @@
 
 ![alt text](tmp/tw_finch.jpg)
 
-The repository contains our code for the proposed method described in our CVPR 2021 paper **Temporally-Weighted Hierarchical Clustering for Unsupervised Action Segmentation** .
+The repository contains our code for the proposed method described in our CVPR 2021 paper **Temporally-Weighted Hierarchical Clustering for Unsupervised Action Segmentation** . [Read Paper](https://research.fb.com/publications/temporally-weighted-hierarchical-clustering-for-unsupervised-action-segmentation/)
 
 ```
 @inproceedings{tw-finch,
