@@ -21,11 +21,20 @@ end
 if strcmp(Dataset, 'YTI')
     gt_label_frame=table2array(readtable(fullfile(gt_path, vid_name), 'Delimiter', '#', 'ReadVariableNames',false));
     
-elseif strcmp(Dataset, 'Breakfast')|strcmp(Dataset, '50Salads')
+elseif strcmp(Dataset, 'Breakfast')
     map=readtable(fullfile(mapping_path, 'mapping.txt'));
     map2=table([1:numel(map.Var2)]', 'RowNames', map.Var2);
     gt_label_str=table2cell(readtable(fullfile(gt_path, vid_name), 'Delimiter', '#', 'ReadVariableNames',false));
     gt_label_frame=table2array(map2(gt_label_str,1));
+
+elseif strcmp(Dataset, '50Salads')
+    map=readtable(fullfile(mapping_path, 'mappingeval.txt'));
+    map2=table([1:numel(map.Var2)]', 'RowNames', map.Var2);
+    gt_label_str=table2cell(readtable(fullfile(gt_path, vid_name), 'Delimiter', '#', 'ReadVariableNames',false));       
+    gt_label_frame=table2array(map2(gt_label_str,1));
+    grp = map.Var1 +1;
+    gt_label_frame = grp(gt_label_frame);
+    
     
 else
     gt_label_frame=table2cell(readtable(fullfile(gt_path, vid_name), 'Delimiter', '#', 'ReadVariableNames',false));

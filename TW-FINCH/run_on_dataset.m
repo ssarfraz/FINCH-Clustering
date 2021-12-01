@@ -1,6 +1,6 @@
 function Result = run_on_dataset(Dataset, tw_finch, datasets_path)
 % Input
-% Dataset: dataset name - one of 'BF', 'Hollywood_extended', 'FS', 'MPII_Cooking', 'YTI'
+% Dataset: dataset name - one of 'Breakfast', 'Hollywood_extended', '50Salads', 'MPII_Cooking', 'YTI'
 % tw_finch: true or false: pass true to run tw_finch else will run finch
 % datasets_path : root folder where all datasets folders exist
 % Output
@@ -53,8 +53,8 @@ MPI_flag = true;
 % Load average gt per activity for clustering each video 
 activity_gt = load(fullfile(mapping_path, 'avg_gt_per_activity.mat'));
 gt_per_activity = activity_gt.gt_per_activity; 
- 
- 
+
+
 [moF,iou,f1, overview_table] = action_seg(files, activity_video_labels, gt_per_activity, Dataset, datasets_path, tw_finch);
  
 Result.moF = moF;

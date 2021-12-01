@@ -22,14 +22,14 @@ For this and other video understanding tasks, supervised approaches have achieve
 
 
 
-#####  DataSets : We provide all 5 used datasets (features and labels)
+####  DataSets : We provide all 5 used datasets (features and labels)
 
 All datasets  i.e. 'Breakfast', 'Hollywood_extended', '50Salads', 'MPII_Cooking', 'YTI' are provided as one tar ball (~4 GB). 
 Please credit the original authors who shared the feature vectors of these datasets (please see our paper).
 
 Downlaod link: https://bwsyncandshare.kit.edu/s/GtWYdcHckJNtRzJ
 
-#### Run Action segmentation on video datsets
+### Run Action segmentation on video datsets
  
 While both Matlab and python implementations of TW_FINCH are included, data reading and evaluation on the datasets are currently only in Matlab as used in the paper.        
 
