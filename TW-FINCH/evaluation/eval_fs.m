@@ -28,7 +28,7 @@ iou= sum(iou)/ k;
 
  function labs = fs_eval_mode_map(labs, datasets_path)
         mapping_path = fullfile(datasets_path, '50Salads', 'mapping');
-        map=readtable(fullfile(mapping_path, 'mappingeval.txt'));
+        map=readtable(fullfile(mapping_path, 'mapping.txt'));
         label_str = map.Var2(labs);
         
         map_val=readtable(fullfile(mapping_path, 'mappingeval.txt'));
