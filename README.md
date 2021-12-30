@@ -4,7 +4,7 @@ The repository contains our Python and Matlab code for the proposed FINCH cluste
 
 ```
 @inproceedings{finch,
-    author    = {M. Saquib Sarfraz, Vivek Sharma and Rainer Stiefelhagen}, 
+    author    = {M. Saquib Sarfraz and Vivek Sharma and Rainer Stiefelhagen}, 
     title     = {Efficient Parameter-free Clustering Using First Neighbor Relations}, 
     booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
     pages = {8934--8943}
