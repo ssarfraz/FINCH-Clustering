@@ -19,7 +19,7 @@ Python : numpy, scipy, sklearn
 
 Matlab : 2017 or above: may run on earlier versions as well
 
-**Optional**.  Install [pyflann](https://github.com/nashory/pyflann) or [flann](https://github.com/mariusmuja/flann) to get first neighbours from Kd-tree for large data
+**Optional**.  Install [PyNNDescent](https://github.com/lmcinnes/pynndescent) to get first neighbours for large data
 
 
 ## Usage:
@@ -103,8 +103,8 @@ req_c= req_numclust(c(:,3), data, 15)
 
 
 ### Note:
-To run it on large data >70k samples, install [flann library](https://github.com/mariusmuja/flann) (In matlab, see [flann_nn.m](https://github.com/ssarfraz/FINCH-Clustering/blob/master/FINCH_Core/flann_nn.m)), it will automatically switch to use flann (kd tree) for finding 1st neighbours.
- Note that you can also change when to switch to using flann in python [finch.py] or in the matlab function [clustRank.m] line 10.
+To run it on large data (for which computing pairwise distance matrix won't fit in your memory), install pynndescent (pip install pynndescent) or [flann library](https://github.com/mariusmuja/flann) for matlab (In matlab, see [flann_nn.m](https://github.com/ssarfraz/FINCH-Clustering/blob/master/FINCH_Core/flann_nn.m)).
+Note that you can also change when to switch to using Approximate NN in python [finch.py] line 17 or in the matlab function [clustRank.m] line 10.
 
 **Finally**, if you use FINCH on 2D toy data (for visualization) then use euclidean distance. In python [finch.py] as input option or in matlab, the file [clustRank.m] line 11. as here you have xy coordinates of each point to cluster.
 

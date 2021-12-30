@@ -151,7 +151,7 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_ear
         print('Partition 0: {} clusters'.format(num_clust))
 
     if ensure_early_exit:
-        if len(orig_dist) != 0:
+        if orig_dist.shape[-1] > 2:
             min_sim = np.max(orig_dist * adj.toarray())
 
     exit_clust = 2
