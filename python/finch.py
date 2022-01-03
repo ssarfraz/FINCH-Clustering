@@ -21,7 +21,7 @@ def clust_rank(mat, initial_rank=None, distance='cosine'):
     s = mat.shape[0]
     if initial_rank is not None:
         orig_dist = []
-    elif s <= FLANN_THRESHOLD:
+    elif s <= ANN_THRESHOLD:
         orig_dist = metrics.pairwise.pairwise_distances(mat, mat, metric=distance)
         np.fill_diagonal(orig_dist, 1e12)
         initial_rank = np.argmin(orig_dist, axis=1)
