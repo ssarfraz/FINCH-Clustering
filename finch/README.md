@@ -43,7 +43,7 @@ We can load the  data from /data/STL_10/data.mat. This has 13000 vectors stored 
 
 See below the notebook for an example on clustering the STL-10 data, which depicts the usage of input params as well.
 
-- [Clustering STL-10 dataset with FINCH](notebooks/Clustering_with_FINCH.ipynb)
+- [Clustering STL-10 dataset with FINCH](https://github.com/ssarfraz/FINCH-Clustering/blob/master/notebooks/Clustering_with_FINCH.ipynb)
 
 
 

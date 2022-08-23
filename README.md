@@ -34,14 +34,14 @@ For more details on meaning of input arguments check README in [finch directory]
 
 **Demo Notebook:** The following demo notebooks are available to to see the usage in clustering a dataset.
 
-1. [Basic usage on 2D toy data](notebooks/Basic_usage.ipynb)
-2. [Clustering STL-10 dataset with FINCH](notebooks/Clustering_with_FINCH.ipynb)
+1. [Basic usage on 2D toy data](https://github.com/ssarfraz/FINCH-Clustering/blob/master/notebooks/Basic_usage.ipynb)
+2. [Clustering STL-10 dataset with FINCH](https://github.com/ssarfraz/FINCH-Clustering/blob/master/notebooks/Clustering_with_FINCH.ipynb)
  
 
 
 **Matlab usage**
 
-Correponding Matlab implementation is provided in the [matlab directory](matlab/README.md).
+Correponding Matlab implementation is provided in the [matlab directory](https://github.com/ssarfraz/FINCH-Clustering/tree/master/matlab/README.md).
 
 
 
