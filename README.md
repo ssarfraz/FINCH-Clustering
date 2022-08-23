@@ -1,7 +1,7 @@
 # First Integer Neighbor Clustering Hierarchy (FINCH) Algorithm
 
-The repository contains our code for the proposed FINCH clustering algorithm described in our **Efficient Parameter-free Clustering Using First Neighbor Relations** CVPR 2019 oral [paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Sarfraz_Efficient_Parameter-Free_Clustering_Using_First_Neighbor_Relations_CVPR_2019_paper.pdf).
-
+FINCH is a parameter-free fast and scalable clustering algorithm. it stands out for its speed and clustering quality.
+ The algorithm is described in our paper **Efficient Parameter-free Clustering Using First Neighbor Relations** published in CVPR 2019 . [Read Paper](http://openaccess.thecvf.com/content_CVPR_2019/papers/Sarfraz_Efficient_Parameter-Free_Clustering_Using_First_Neighbor_Relations_CVPR_2019_paper.pdf).
 
 
 ## Installation
