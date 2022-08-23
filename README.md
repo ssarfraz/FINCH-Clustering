@@ -61,6 +61,4 @@ Correponding Matlab implementation is provided in the [matlab directory](matlab/
 
 ```
 
-**The code and FINCH algorithm is not meant for commercial use. Please contact the author below for licensing information.**
-
-M. Saquib Sarfraz (saquib.sarfraz@kit.edu)
+**The code and FINCH algorithm is not meant for commercial use. Please contact the author for licensing information.**
