@@ -59,22 +59,6 @@ def get_clust(a, orig_dist, min_sim=None):
     return u, num_clust
 
 
-def cool_mean_old(M, u):
-    _, nf = np.unique(u, return_counts=True)
-    idx = np.argsort(u)
-    M = M[idx, :]
-    M = np.vstack((np.zeros((1, M.shape[1])), M))
-
-    np.cumsum(M, axis=0, out=M)
-    cnf = np.cumsum(nf)
-    nf1 = np.insert(cnf, 0, 0)
-    nf1 = nf1[:-1]
-
-    M = M[cnf, :] - M[nf1, :]
-    M = M / nf[:, None]
-    return M
-
-
 def cool_mean(M, u):
     s = M.shape[0]
     un, nf = np.unique(u, return_counts=True)
