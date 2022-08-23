@@ -17,21 +17,21 @@ except Exception as e:
 
 def clust_rank(
         mat,
-        use_ann_above_samples,
+        ann_threshold,
         initial_rank=None,
         distance='cosine',
         verbose=False):
-
+    
     s = mat.shape[0]
     if initial_rank is not None:
         orig_dist = []
-    elif s <= use_ann_above_samples:
+    elif s <= ann_threshold:
         orig_dist = metrics.pairwise.pairwise_distances(mat, mat, metric=distance)
         np.fill_diagonal(orig_dist, 1e12)
         initial_rank = np.argmin(orig_dist, axis=1)
     else:
         if not pynndescent_available:
-            raise MemoryError("You should use pynndescent for inputs larger than {} samples.".format(use_ann_above_samples))
+            raise MemoryError("You should use pynndescent for inputs larger than {} samples.".format(ann_threshold))
         if verbose:
             print('Using PyNNDescent to compute 1st-neighbours at this step ...')
 
@@ -94,11 +94,11 @@ def update_adj(adj, d):
     return a
 
 
-def req_numclust(c, data, req_clust, distance, use_ann_above_samples, verbose):
+def req_numclust(c, data, req_clust, distance, ann_threshold, verbose):
     iter_ = len(np.unique(c)) - req_clust
     c_, mat = get_merge([], c, data)
     for i in range(iter_):
-        adj, orig_dist = clust_rank(mat, use_ann_above_samples, initial_rank=None, distance=distance, verbose=verbose)
+        adj, orig_dist = clust_rank(mat, ann_threshold, initial_rank=None, distance=distance, verbose=verbose)
         adj = update_adj(adj, orig_dist)
         u, _ = get_clust(adj, [], min_sim=None)
         c_, mat = get_merge(c_, u, data)
@@ -112,7 +112,7 @@ def FINCH(
         distance='cosine',
         ensure_early_exit=True,
         verbose=True,
-        use_ann_above_samples=70000):
+        ann_threshold=70000):
     """ FINCH clustering algorithm.
     :param data: Input matrix with features in rows.
     :param initial_rank: Nx1 first integer neighbor indices (optional).
@@ -120,7 +120,7 @@ def FINCH(
     :param distance: One of ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'] Recommended 'cosine'.
     :param ensure_early_exit: [Optional flag] may help in large, high dim datasets, ensure purity of merges and helps early exit
     :param verbose: Print verbose output.
-    :param use_ann_above_samples: Above this data size (number of samples) approximate nearest neighbors will be used to speed up neighbor
+    :param ann_threshold: Above this data size (number of samples) approximate nearest neighbors will be used to speed up neighbor
         discovery. For large scale data where exact distances are not feasible to compute, set this. [default = 70000]
     :return:
             c: NxP matrix where P is the partition. Cluster label for every partition.
@@ -141,7 +141,7 @@ def FINCH(
 
     min_sim = None
     adj, orig_dist = clust_rank(data,
-                                use_ann_above_samples,
+                                ann_threshold,
                                 initial_rank,
                                 distance,
                                 verbose)
@@ -162,7 +162,7 @@ def FINCH(
     num_clust = [num_clust]
 
     while exit_clust > 1:
-        adj, orig_dist = clust_rank(mat, use_ann_above_samples, initial_rank, distance, verbose)
+        adj, orig_dist = clust_rank(mat, ann_threshold, initial_rank, distance, verbose)
         u, num_clust_curr = get_clust(adj, orig_dist, min_sim)
         c_, mat = get_merge(c_, u, data)
 
@@ -182,7 +182,7 @@ def FINCH(
     if req_clust is not None:
         if req_clust not in num_clust:
             ind = [i for i, v in enumerate(num_clust) if v >= req_clust]
-            req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, use_ann_above_samples, verbose)
+            req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, ann_threshold, verbose)
         else:
             req_c = c[:, num_clust.index(req_clust)]
     else:
