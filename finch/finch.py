@@ -24,7 +24,7 @@ def clust_rank(
 
     s = mat.shape[0]
     if initial_rank is not None:
-        orig_dist = []
+        orig_dist = np.empty(shape=(1, 1))
     elif s <= use_ann_above_samples:
         orig_dist = metrics.pairwise.pairwise_distances(mat, mat, metric=distance)
         np.fill_diagonal(orig_dist, 1e12)

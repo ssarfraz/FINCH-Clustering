@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="finch-clust",
-    version="0.1.5",
+    version="0.1.6",
     author="Saquib Sarfraz",
     author_email="saquibsarfraz@gmail.com",
     description="A parameter-free fast clustering algorithm.",
