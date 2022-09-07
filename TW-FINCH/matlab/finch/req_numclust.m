@@ -27,7 +27,9 @@ if tw_finch
     time_index=(1:n_frames)/n_frames;
     data = [data, time_index']; 
     clustRank_fn=@clustRank_tw; 
-  end
+else
+    clustRank_fn=@clustRank; 
+end
 
        iter=length(unique(c))- req_clust;
 

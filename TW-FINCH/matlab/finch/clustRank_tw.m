@@ -43,6 +43,7 @@ end
   A(logical(speye(size(A))))=0;
 
   A=spones(A);
+  
 %%%
    
 end

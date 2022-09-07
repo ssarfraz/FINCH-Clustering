@@ -20,16 +20,17 @@ ANN_THRESHOLD = 70000
 
 def clust_rank(mat, initial_rank=None, distance='cosine', use_tw_finch=False):
     s = mat.shape[0]
-
+    
     if initial_rank is not None:
         orig_dist = []
     elif s <= ANN_THRESHOLD:
         if use_tw_finch:
             loc = mat[:, -1]
-            mat = mat[:, :-1]
-            loc_dist = metrics.pairwise.euclidean_distances(loc[:, None], loc[:, None])
+            mat = mat[:, :-1]            
+            loc_dist = np.sqrt((loc[:, None] - loc[:, None].T)**2)            
+            
         else:
-            loc_dist = 1.
+            loc_dist = 1.            
 
         orig_dist = metrics.pairwise.pairwise_distances(mat, mat, metric=distance)
         orig_dist = orig_dist * loc_dist
@@ -39,7 +40,8 @@ def clust_rank(mat, initial_rank=None, distance='cosine', use_tw_finch=False):
         if not pynndescent_available:
             raise MemoryError("You should use pynndescent for inputs larger than {} samples.".format(ANN_THRESHOLD))
         print('Using PyNNDescent to compute 1st-neighbours at this step ...')
-
+        if use_tw_finch:
+            print(f'Since the video is larger than {ANN_THRESHOLD} samples, we cannot compute all distances. Instead FINCH will be used')
         knn_index = NNDescent(
             mat,
             n_neighbors=2,
@@ -57,7 +59,7 @@ def clust_rank(mat, initial_rank=None, distance='cosine', use_tw_finch=False):
     A = A @ A.T
 
     A = A.tolil()
-    A.setdiag(0)
+    A.setdiag(0)   
     return A, orig_dist
 
 
@@ -133,16 +135,16 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', tw_finch=T
     M. Saquib Sarfraz (saquib.sarfraz@kit.edu)
     Karlsruhe Institute of Technology (KIT)
     """
-    # Cast input data to float32
-    data = data.astype(np.float32)
-
     if tw_finch:
         n_frames = data.shape[0]
-        time_index = np.arange(n_frames) / n_frames
+        time_index = (np.arange(n_frames) + 1.) / n_frames       
         data = np.concatenate([data, time_index[..., np.newaxis]], axis=1)
         ensure_early_exit = False
         verbose = False
 
+    # Cast input data to float32
+    data = data.astype(np.float32)
+    
     min_sim = None
     adj, orig_dist = clust_rank(data, initial_rank, distance=distance, use_tw_finch=tw_finch)
     initial_rank = None
@@ -161,7 +163,7 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', tw_finch=T
     k = 1
     num_clust = [num_clust]
 
-    while exit_clust > 1:
+    while exit_clust > 1:        
         adj, orig_dist = clust_rank(mat, initial_rank, distance=distance, use_tw_finch=tw_finch)
         u, num_clust_curr = get_clust(adj, orig_dist, min_sim)
         c_, mat = get_merge(c_, u, data)

@@ -4,7 +4,7 @@ function [moF, iou, f1, overview_table] = action_seg(files, activity_video_label
      
 verbose=false;
 dist = 'cosine'; 
-%tw_finch = true;
+
 
 
 each_vid_acc=[];

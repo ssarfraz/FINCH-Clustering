@@ -35,7 +35,7 @@ clustRank_fn= @clustRank;
 if tw_finch
       n_frames = size(data, 1);
       time_index=(1:n_frames)/n_frames;
-      data = [data, time_index']; 
+      data = [data, time_index'];      
       clustRank_fn=@clustRank_tw; 
 end
 %%     
@@ -60,11 +60,10 @@ end
     exit_clust=inf;
     c_=c;
 k=2;
-while exit_clust>1
-
+while exit_clust>1    
     [Affinity_,  orig_dist,~]= clustRank_fn(mat,initial_rank, dist);  
       
-    [u] = get_clust(Affinity_, double(orig_dist),min_sim);
+    [u] = get_clust(Affinity_, double(orig_dist),min_sim);    
     [c_,num_clust_curr, mat]=get_merge(c_, u, data);     
     
     

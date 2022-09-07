@@ -2,7 +2,7 @@
 
 
 ``` 
-from finch import FINCH
+from twfinch import FINCH
 c, num_clust, req_c = FINCH(data, req_clust=K, tw_finch=True)
 
 ```

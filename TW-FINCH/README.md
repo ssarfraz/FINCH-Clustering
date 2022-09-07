@@ -31,9 +31,19 @@ Downlaod link: https://bwsyncandshare.kit.edu/s/GtWYdcHckJNtRzJ
 
 ### Run Action segmentation on video datsets
  
-While both Matlab and python implementations of TW_FINCH are included, data reading and evaluation on the datasets are currently only in Matlab as used in the paper.        
+Both Python and Matlab implementations of TW_FINCH are included and supports data reading and evaluation on the datasets.        
 
-Add this repo to your Matlab path
+* Python
+
+```
+from run_on_dataset import run_twfinch
+
+Result = run_twfinch(dataset_name = None, datasets_path = None, tw_finch=True, verbose=True);
+```
+
+* Matlab
+
+Add the matlab folder to your Matlab path
 
 Run  MATLAB file [run_on_dataset.m](https://github.com/ssarfraz/FINCH-Clustering/blob/master/TW-FINCH/run_on_dataset.m) to reproduce the results in the paper. 
 ```
@@ -43,9 +53,9 @@ Result = run_on_dataset(Dataset_name, tw_finch, datasets_root_path);
 
 Input:
 
-* Dataset_name: dataset name - one of 'Breakfast', 'Hollywood_extended', '50Salads', 'MPII_Cooking', 'YTI'
+* dataset_name: dataset name - one of 'Breakfast', 'Hollywood_extended', '50Salads', 'MPII_Cooking', 'YTI'
 * tw_finch: true or false: pass true to run tw_finch else will run finch
 * datasets_path : root folder path where all dataset folders exist. See above the link to download all datasets
 
 Output
-* Result: struct with computed metrics on full dataset and a detailed overview table of results per video
+* Result: computed metrics on full dataset and detailed results per video
