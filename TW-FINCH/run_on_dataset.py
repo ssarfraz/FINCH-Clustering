@@ -3,7 +3,7 @@ import os
 import time
 import numpy as np
 import pandas as pd
-from python.read_utils import get_mapping, read_gt_label, decode_hung_labels, estimate_cost_matrix, avg_gt_activity_datasets
+from python.read_utils import get_mapping, read_gt_label, estimate_cost_matrix, avg_gt_activity_datasets
 from scipy.optimize import linear_sum_assignment
 from sklearn import metrics
 from python.twfinch import FINCH
@@ -69,7 +69,7 @@ def run_twfinch(
         cost_matrix = estimate_cost_matrix(gt_labels, req_c)
         row_ind, col_ind = linear_sum_assignment(cost_matrix)
         # decode the predicted labels
-        y_pred = decode_hung_labels(req_c, col_ind)
+        y_pred = col_ind[req_c]
 
         # Calculate the metrics (External libraries)
         mof = -cost_matrix[row_ind, col_ind].sum() / len(
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     parser.add_argument('--tw-finch', action='store_true', default=True)
     parser.add_argument('--verbose', action='store_true', default=True)
     args = parser.parse_args()
-    results = run_twfinch(dataset_name=args.dataset_name,
+    _ = run_twfinch(dataset_name=args.dataset_name,
                           datasets_path=args.datasets_path,
                           tw_finch=args.tw_finch,
                           verbose=args.verbose)

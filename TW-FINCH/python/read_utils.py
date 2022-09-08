@@ -45,15 +45,6 @@ def estimate_cost_matrix(gt_labels, cluster_labels):
     return -profit_mat
 
 
-def decode_hung_labels(pred_lab_enc, col_ind):
-    """ from https://github.com/Cornibouchon:"""
-    pred_act_id = np.empty(shape=(len(pred_lab_enc)), dtype=int)
-    for num, item in enumerate(col_ind):
-        cur_indexes = np.where(pred_lab_enc == num)
-        pred_act_id[cur_indexes] = item
-    return pred_act_id
-
-
 # Pre_computed average # of actions per activity in the datasets. We cluster each video to this K
 avg_gt_activity_datasets = {'Breakfast': {'cereals': 4, 'coffee': 4, 'friedegg': 6, 'juice': 5,
                                           'milk': 4, 'pancake': 9, 'salat': 5,
