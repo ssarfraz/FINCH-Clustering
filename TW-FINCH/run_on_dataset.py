@@ -76,7 +76,7 @@ def run_twfinch(
             cur_desc)  # MoF accuracy can also be computed with sklearn metrics.accuracy_score
         cur_acc = metrics.accuracy_score(gt_labels, y_pred)
 
-        f1_macro = metrics.f1_score(gt_labels, y_pred, average='macro')  # F1-Score
+        f1_macro = metrics.f1_score(gt_labels, y_pred, average='macro') # F1-Score
         # iou_macro = metrics.jaccard_score(gt_labels, y_pred, average='macro')  # IOU
         # penalize equally over/under clustering
         iou = np.sum(metrics.jaccard_score(gt_labels, y_pred, average=None)) / n_clusters
@@ -101,7 +101,7 @@ def run_twfinch(
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('--dataset-name', required=True, help='Specify the path to your data csv file.')
+    parser.add_argument('--dataset-name', required=True, help='Specify the name of dataset. Options: [Breakfast, Hollywood_extended, 50Salads, MPII_Cooking, YTI]')
     parser.add_argument('--datasets-path', required=True, help='Specify the root folder of all datsets')
     parser.add_argument('--tw-finch', action='store_true', default=True)
     parser.add_argument('--verbose', action='store_true', default=True)

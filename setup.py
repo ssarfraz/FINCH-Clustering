@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="finch-clust",
-    version="0.1.8",
+    version="0.1.9",
     author="Saquib Sarfraz",
     author_email="saquibsarfraz@gmail.com",
     description="FINCH - First Integer Neighbor Clustering Hierarchy: A parameter-free fast clustering algorithm.",
@@ -25,9 +25,9 @@ setuptools.setup(
     ],
     keywords="finch, finch clustering, clustering, hierarchical clustering",
     install_requires=[
+        "scipy",
         "scikit-learn",
-        "numpy",
-        "sklearn"
+        "numpy"
     ],
     extras_require={'ann': ["numpy==1.21", "pynndescent"]},
     project_urls={
