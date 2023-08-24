@@ -181,12 +181,8 @@ def FINCH(
 
     if req_clust is not None:
         if req_clust not in num_clust:
-            if req_clust > num_clust[0]:
-                print(f'requested number of clusters are larger than FINCH first partition with {num_clust[0]} clusters . Returning {num_clust[0]} clusters')
-                req_c = c[:, 0]
-            else:
-                ind = [i for i, v in enumerate(num_clust) if v >= req_clust]
-                req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, use_ann_above_samples, verbose)
+            ind = [i for i, v in enumerate(num_clust) if v >= req_clust]
+            req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, use_ann_above_samples, verbose)
         else:
             req_c = c[:, num_clust.index(req_clust)]
     else:
