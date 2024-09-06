@@ -132,8 +132,7 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', tw_finch=T
     For academic purpose only. The code or its re-implementation should not be used for commercial use.
     Please contact the author below for licensing information.
     Copyright
-    M. Saquib Sarfraz (saquib.sarfraz@kit.edu)
-    Karlsruhe Institute of Technology (KIT)
+    M. Saquib Sarfraz (saquibsarfraz@gmail.com)
     """
     if tw_finch:
         n_frames = data.shape[0]
@@ -183,8 +182,13 @@ def FINCH(data, initial_rank=None, req_clust=None, distance='cosine', tw_finch=T
 
     if req_clust is not None:
         if req_clust not in num_clust:
-            ind = [i for i, v in enumerate(num_clust) if v >= req_clust]
-            req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, use_tw_finch=tw_finch)
+            if req_clust > num_clust[0]:
+                print(
+                    f'requested number of clusters are larger than FINCH first partition with {num_clust[0]} clusters . Returning {num_clust[0]} clusters')
+                req_c = c[:, 0]
+            else:
+                ind = [i for i, v in enumerate(num_clust) if v >= req_clust]
+                req_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, use_ann_above_samples, verbose)
         else:
             req_c = c[:, num_clust.index(req_clust)]
     else:

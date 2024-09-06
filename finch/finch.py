@@ -133,8 +133,7 @@ def FINCH(
     For academic purpose only. The code or its re-implementation should not be used for commercial use.
     Please contact the author below for licensing information.
     Copyright
-    M. Saquib Sarfraz (saquib.sarfraz@kit.edu)
-    Karlsruhe Institute of Technology (KIT)
+    M. Saquib Sarfraz (saquibsarfraz@gmail.com)
     """
     # Cast input data to float32
     data = data.astype(np.float32)
