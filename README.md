@@ -66,4 +66,4 @@ The following demo notebooks are available to see the usage in clustering a data
 
 ```
 
-**The code and FINCH algorithm is not meant for commercial use. Please contact the author for licensing information.**
+
