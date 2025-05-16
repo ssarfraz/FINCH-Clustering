@@ -16,7 +16,7 @@ setuptools.setup(
     packages=['finch'],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "License :: MIT",
+        "License :: Freely Distributable",
         "Operating System :: Unix",
         "Operating System :: MacOS",
         "Programming Language :: Python :: 3.7",
