@@ -29,7 +29,7 @@ setuptools.setup(
         "scikit-learn",
         "numpy"
     ],
-    extras_require={'ann': ["numpy==1.21", "pynndescent"]},
+    extras_require={'ann': ["pynndescent"]},
     project_urls={
         "Repository": "https://github.com/ssarfraz/FINCH-Clustering",
         "Publication": "https://openaccess.thecvf.com/content_CVPR_2019/html/Sarfraz_Efficient_Parameter-Free_Clustering_Using_First_Neighbor_Relations_CVPR_2019_paper.html"
