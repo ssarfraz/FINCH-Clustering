@@ -7,7 +7,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name="finch-clust",
-    version="0.2.0",
+    version="0.2.1",
     author="Saquib Sarfraz",
     author_email="saquibsarfraz@gmail.com",
     description="FINCH - First Integer Neighbor Clustering Hierarchy: A parameter-free fast clustering algorithm.",
@@ -16,7 +16,7 @@ setuptools.setup(
     packages=['finch'],
     classifiers=[
         "Development Status :: 5 - Production/Stable",
-        "License :: Free for non-commercial use",
+        "License :: MIT",
         "Operating System :: Unix",
         "Operating System :: MacOS",
         "Programming Language :: Python :: 3.7",
