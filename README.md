@@ -1,3 +1,5 @@
+[![PyPI Downloads](https://static.pepy.tech/badge/finch-clust)](https://pepy.tech/projects/finch-clust)
+
 # First Integer Neighbor Clustering Hierarchy (FINCH) Algorithm
 ![alt text](https://raw.githubusercontent.com/ssarfraz/FINCH-Clustering/master/data/toy_data_vis.jpg)
 
