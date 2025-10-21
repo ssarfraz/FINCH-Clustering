@@ -35,7 +35,7 @@ For more details on meaning of input arguments check README in [finch directory]
 
 **Matlab usage**
 
-Correponding Matlab implementation is provided in the [matlab directory](https://github.com/ssarfraz/FINCH-Clustering/tree/master/matlab/README.md).
+A minimal correponding Matlab implementation is provided in the [matlab directory](https://github.com/ssarfraz/FINCH-Clustering/tree/master/matlab/README.md).
 
 ## Demos
 
@@ -43,11 +43,6 @@ The following demo notebooks are available to see the usage in clustering a data
 
 1. [Basic usage on 2D toy data](https://github.com/ssarfraz/FINCH-Clustering/blob/master/notebooks/Basic_usage.ipynb)
 2. [Clustering STL-10 dataset with FINCH](https://github.com/ssarfraz/FINCH-Clustering/blob/master/notebooks/Clustering_with_FINCH.ipynb)
- 
-
-
-
-
 
 
 ## Relevant tools built on FINCH

@@ -16,20 +16,31 @@ c, num_clust, req_c = FINCH(data)
 You can set options e.g., required number of cluster [optional] or distance etc,
 
 ```
-c, num_clust, req_c = FINCH(data, initial_rank=None, req_clust=None, distance='cosine', ensure_early_exit=False, verbose=True)
+c, num_clust, req_c = FINCH(data,
+                            initial_rank=None,
+                            req_clust=None,
+                            distance='cosine',
+                            ensure_early_exit=True,
+                            faiss_threshold=5_000_000,
+                            faiss_use_gpu= False,
+                            ram_size_in_gb=None,
+                            verbose=True)
 ```
 
 Input:
 
 * data: numpy array (feature vectors in rows)
 * [OPTIONAL]
-    * req_c: specify required number of cluster
-    * distance: One of ['cityblock', 'cosine', 'euclidean', 'l1', 'l2', 'manhattan'] Recommended: 'cosine (default)' and 'euclidean (for 2D toy data)'
-    * initial_rank: Nx1 vector of 1-neighbour indices
-    * ensure_early_exit: (default: True) if set it may help for Unbalanced or large datasets, ensure purity of merges and helps early exit
-    * use_ann_above_samples: Above this data size (number of samples) approximate nearest neighbors will be used to speed up neighbor
-        discovery. set this for data where exact distances are not feasible to compute. [default = 70000]
-    * verbos : for printing some output
+    * req_c: specify required number of cluster, if set finch returns required number of clusters
+    * distance: One of sklearn's distance metrics. Recommended: 'cosine (default)' and 'euclidean'
+    * initial_rank: Nx1 vector of 1-neighbour indices, optional if provided skip the first distance compute and directly used these in build.
+    * ensure_early_exit: (default: True) if set it may help for Unbalanced or small datasets, ensure purity of merges and helps early exit
+    * ann_threshold: Above this data size (number of samples) approximate nearest neighbors will be used to speed up neighbor
+        discovery. set this for data where exact distances are not feasible to compute. [default = 20000]
+    * faiss_threshold: if faiss is installed use faiss for ann above this many data samples
+    * faiss_use_gpu: use faiss if faiss-gpu installed
+    * ram_size_in_gb: if provided optimized faiss kwargs are used as per data size and available ram 
+    * verbos : print some intermediate info
 
 Output:
 
