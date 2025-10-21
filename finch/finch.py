@@ -214,7 +214,7 @@ def FINCH(
         faiss_threshold: int = 5_000_000,
         faiss_use_gpu: bool = False,
         ram_size_in_gb: Optional[int] = None,
-        faiss_kwargs: dict  = None,
+        faiss_kwargs: dict = None,
         return_meta_labels: bool = False,
         verbose: bool = False,
         random_state: Optional[int] = None,

@@ -1,6 +1,7 @@
 import math
 import numpy as np
 
+
 # -------------------- FAISS IVF-PQ (approximate) 1-NN --------------------
 
 def _estimate_hnsw_bytes(n: int, d: int, M: int = 16) -> int:
@@ -15,7 +16,7 @@ def _estimate_ivfpq_bytes(n: int, d: int, nlist: int, m: int, nbits: int, id_byt
     return invlist_bytes + coarse_centroids
 
 
-def _default_faiss_kwargs(n: int, metric: str, d: int = 1024, *, ram_gb: int | None = None) -> dict:
+def _default_faiss_kwargs(n: int, metric: str, d: int = 1024, *, ram_gb: int = None) -> dict:
     """
     Choose method + params based on dataset size and RAM.
     - If ram_gb is None, assume: 64 GB for n<5M, 128 GB for 5–20M, 256 GB otherwise.
@@ -83,11 +84,11 @@ def faiss_top1(
         gpu_device: int = 0,
 
         # IVF/HNSW knobs (supply via _default_faiss_kwargs)
-        nlist: int | None = None,
-        nprobe: int | None = None,
+        nlist: int = None,
+        nprobe: int = None,
         m: int = 16,
         nbits: int = 8,
-        train_size: int | None = None,
+        train_size: int = None,
 
         # HNSW knobs
         hnsw_M: int = 16,
@@ -240,8 +241,7 @@ def faiss_top1(
     return nn_idx, nn_dist
 
 
-##---------------Optional(not used currently)---- chunked exact pairwise-----------------#
-
+# --------------Optional(not used currently)---- chunked exact pairwise-----------------
 def one_nn_exact_chunked(mat, metric="cosine", chunk_size=4000):
     """
     Exact 1-NN with O(N * chunk_size) memory via chunked pairwise distances.
