@@ -1,17 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
+# requires TWINE env vars set:
+# export TWINE_USERNAME="__token__"
+# export TWINE_PASSWORD="pypi-xxxxxxxxxxxxxxxx"
 
-if [ -z "$1" ]
-    then
-        echo "please give the version number"
-        exit 1
-fi
-
-python setup.py sdist bdist_wheel
-python -m twine check dist/finch-clust-$1.tar.gz
-python -m twine upload dist/finch-clust-$1.tar.gz
-
-
-
-
+rm -rf dist build *.egg-info
+python3 -m pip install --upgrade pip build twine
+python3 -m build                  # makes sdist + wheel in dist/
+python3 -m twine check dist/*     # sanity check
+python3 -m twine upload dist/*    # upload both sdist and wheel
