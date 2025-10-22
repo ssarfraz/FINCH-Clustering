@@ -21,6 +21,7 @@ c, num_clust, req_c = FINCH(data,
                             req_clust=None,
                             distance='cosine',
                             ensure_early_exit=True,
+                            ann_threshold=20_000,
                             faiss_threshold=5_000_000,
                             faiss_use_gpu= False,
                             ram_size_in_gb=None,
@@ -31,15 +32,15 @@ Input:
 
 * data: numpy array (feature vectors in rows)
 * [OPTIONAL]
-    * req_c: specify required number of cluster, if set finch returns required number of clusters
+    * req_clust: specify required number of clusters, if set finch additionally returns the required clusters' labels
     * distance: One of sklearn's distance metrics. Recommended: 'cosine (default)' and 'euclidean'
     * initial_rank: Nx1 vector of 1-neighbour indices, optional if provided skip the first distance compute and directly used these in build.
     * ensure_early_exit: (default: True) if set it may help for Unbalanced or small datasets, ensure purity of merges and helps early exit
     * ann_threshold: Above this data size (number of samples) approximate nearest neighbors will be used to speed up neighbor
         discovery. set this for data where exact distances are not feasible to compute. [default = 20000]
-    * faiss_threshold: if faiss is installed use faiss for ann above this many data samples
-    * faiss_use_gpu: use faiss if faiss-gpu installed
-    * ram_size_in_gb: if provided optimized faiss kwargs are used as per data size and available ram 
+    * faiss_threshold: if faiss is installed use faiss for ann above this many data samples, faster and memory efficient
+    * faiss_use_gpu: run faiss on gpu if set
+    * ram_size_in_gb: if provided optimized faiss kwargs are used as per data size and available RAM 
     * verbos : print some intermediate info
 
 Output:
