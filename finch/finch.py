@@ -368,6 +368,8 @@ def FINCH(
             else:
                 ind = [i for i, v in enumerate(num_clust) if v >= req_clust]
                 requested_c = req_numclust(c[:, ind[-1]], data, req_clust, distance, ann_threshold, verbose)
+        else:
+            requested_c = c[:, num_clust.index(req_clust)]
 
     else:
         requested_c = None
