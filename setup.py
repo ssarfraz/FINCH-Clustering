@@ -5,7 +5,7 @@ long_description = (this_directory / "README.md").read_text(encoding="utf-8")
 
 setuptools.setup(
     name="finch-clust",
-    version="0.2.2",  # bump each release
+    version="0.2.3",  # bump each release
     python_requires=">=3.8",
     packages=["finch"],  # or: packages=setuptools.find_packages()
     include_package_data=True,       # if you ship non-.py files via MANIFEST.in
